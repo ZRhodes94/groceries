@@ -39,4 +39,11 @@ export class Tab1Page {
       quantity: 1    
     },
   ];
+
+  addItem() {
+    console.log("Adding Item");
+  }
+
+  
+
 }
