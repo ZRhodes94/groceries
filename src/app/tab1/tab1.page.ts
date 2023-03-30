@@ -12,9 +12,9 @@ export class Tab1Page {
 
   constructor(private toastController: ToastController, private alertController: AlertController) {}
 
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
+  async presentToast(position: 'top' | 'middle' | 'bottom', index: number) {
     const toast = await this.toastController.create({
-      message: 'Item removed.',
+      message:  this.items[index].name + " " + 'removed.',
       duration: 1500,
       position: position
     });
@@ -65,6 +65,7 @@ export class Tab1Page {
           }
         }
       ],
+      
       inputs: [
         {
           name: 'name',
@@ -78,6 +79,12 @@ export class Tab1Page {
     });
 
     await alert.present();
+  }
 
-}
-}
+  async removeItem(index: number) {
+    console.log("Index" + " " + index + " removed.");
+    this.presentToast('middle', index);
+    this.items.splice(index, 1);
+  };
+
+};
