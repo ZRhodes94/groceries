@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class Tab1Page {
 
-  constructor(private toastController: ToastController) {}
+  constructor(private toastController: ToastController, private alertController: AlertController) {}
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
@@ -44,6 +45,39 @@ export class Tab1Page {
     console.log("Adding Item");
   }
 
-  
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Add Item',
+      subHeader: 'Input name and quantity.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: item => {
+            console.log('Saved clicked', item);
+            this.items.push(item);
+          }
+        }
+      ],
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name'
+        },
+        {
+          name: 'quantity',
+          placeholder: 'Quantity'
+        },
+      ],
+    });
+
+    await alert.present();
+
+}
 }
