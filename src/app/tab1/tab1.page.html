@@ -13,6 +13,8 @@
     </ion-toolbar>
   </ion-header>
 
+  <h3 class="list-empty" text-center *ngIf="items.length === 0">Your list is empty!</h3>
+
   <ion-list>
     <ion-item-sliding *ngFor="let item of items, let i = index">
       <ion-item>
@@ -20,6 +22,9 @@
       </ion-item>
   
       <ion-item-options side="end">
+        <ion-item-option>
+          <ion-icon expand="block" (click)="editItem(item, i)" slot="icon-only" name="pencil"></ion-icon>
+        </ion-item-option>
         <ion-item-option color="danger">
           <ion-icon expand="block" (click)="removeItem(i)" slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
@@ -30,7 +35,7 @@
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button>
-    <ion-icon (click)="presentAlert()" name="add"></ion-icon>
+    <ion-icon (click)="addItem()" name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 

@@ -22,31 +22,9 @@ export class Tab1Page {
     await toast.present();
   }
 
-  items = [
-    {
-      name: "Milk",
-      quantity: 2    
-    },
-    {
-      name: "Bread",
-      quantity: 1    
-    },
-    {
-      name: "Banana",
-      quantity: 3    
-    },
-    {
-      name: "Sugar",
-      quantity: 1    
-    },
-  ];
+  items: { name: string, quantity: number }[] = [];
 
-  addItem() {
-    console.log("Adding Item");
-  }
-
-
-  async presentAlert() {
+  async addItem() {
     const alert = await this.alertController.create({
       header: 'Add Item',
       subHeader: 'Input name and quantity.',
@@ -79,12 +57,49 @@ export class Tab1Page {
     });
 
     await alert.present();
-  }
+  };
 
   async removeItem(index: number) {
     console.log("Index" + " " + index + " removed.");
     this.presentToast('middle', index);
     this.items.splice(index, 1);
   };
+
+  async editItem (item: { name: string, quantity: number }, index: number) {
+    const alert = await this.alertController.create({
+      header: 'Edit Item',
+      subHeader: 'Edit name and/or quantity.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: item => {
+            console.log('Saved clicked', item);
+            this.items[index] = item;
+          }
+        }
+      ],
+      
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name',
+          value: item.name
+        },
+        {
+          name: 'quantity',
+          placeholder: 'Quantity',
+          value: item.quantity
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
 };
