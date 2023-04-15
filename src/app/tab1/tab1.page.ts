@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Share } from '@capacitor/share';
+
 
 
 @Component({
@@ -63,6 +65,15 @@ export class Tab1Page {
     console.log("Index" + " " + index + " removed.");
     this.presentToast('middle', index);
     this.items.splice(index, 1);
+  };
+
+  async shareItem(item: { name: string, quantity: number }, index: number) {
+    await Share.share({
+      title: 'Grocery Item Shared',
+      text: this.items[index].name + "has been shared.",
+      dialogTitle: 'Shared via Groceries App',
+    });
+    
   };
 
   async editItem (item: { name: string, quantity: number }, index: number) {

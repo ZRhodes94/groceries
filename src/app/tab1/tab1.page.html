@@ -25,6 +25,9 @@
         <ion-item-option>
           <ion-icon expand="block" (click)="editItem(item, i)" slot="icon-only" name="pencil"></ion-icon>
         </ion-item-option>
+        <ion-item-option  color="light">
+          <ion-icon expand="block" (click)="shareItem(item, i)" slot="icon-only" name="share"></ion-icon>
+        </ion-item-option>
         <ion-item-option color="danger">
           <ion-icon expand="block" (click)="removeItem(i)" slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
