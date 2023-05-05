@@ -5,6 +5,8 @@ import { Share } from '@capacitor/share';
 
 
 
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -75,6 +77,20 @@ export class Tab1Page {
     });
     
   };
+
+  async addInventory(item: { name: string, quantity: number }, slidingItem: any) {
+      item.quantity ++;
+      slidingItem.close();
+  };
+
+  async removeInventory(item: { name: string, quantity: number }, index:number, slidingItem: any) {
+    item.quantity --;
+    slidingItem.close();
+
+    if (item.quantity===0) {
+      this.removeItem(index);
+        };
+ };
 
   async editItem (item: { name: string, quantity: number }, index: number) {
     const alert = await this.alertController.create({

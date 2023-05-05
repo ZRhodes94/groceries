@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Contact
+      Cigar Reviews
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,38 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Contact</ion-title>
+      <ion-title size="large">Cigar Reviews</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h2>Zachary Rhodes</h2>
-  <h4>zrhodes1@live.maryville.edu</h4> 
+
+  <h3 class="list-empty" text-center *ngIf="items.length === 0">Time to review some cigars!</h3>
+
+  <ion-list>
+    <ion-card *ngFor="let item of items, let i = index">
+      <ion-card-header>
+        <ion-card-title>{{item.name}}</ion-card-title>
+        <ion-card-subtitle>{{item.rating}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{item.review}}
+        <img src="{{item.src}}" align="right" *ngIf="item.src" alt="Image of {{item.name}}">
+      </ion-card-content>
+      <ion-item>
+        <ion-button fill="clear" (click)="editItem(item, i)">Edit</ion-button>
+        <ion-button fill="clear" (click)="shareItem(item, i)">Share</ion-button>
+        <ion-button fill="clear" (click)="removeItem(i)">Delete</ion-button>
+        <ion-button slot="end" fill="clear" (click)="takePicture(item)">Take Photo</ion-button>
+      </ion-item>
+    </ion-card>
+
+</ion-list>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button>
+    <ion-icon (click)="addItem()" name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
 </ion-content>
